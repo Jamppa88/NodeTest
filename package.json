@@ -1,0 +1,29 @@
+{
+  "name": "nodetest",
+  "version": "1.0.0",
+  "description": "test deployment of node",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jamppa88/NodeTest.git"
+  },
+  "author": "Jani Kerttula",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jamppa88/NodeTest/issues"
+  },
+  "homepage": "https://github.com/Jamppa88/NodeTest#readme",
+  "dependencies": {
+    "async": "^2.5.0",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "bcryptjs": "^2.4.3",
+    "multer": "^1.3.0",
+    "tedious": "^2.0.1"
+  }
+}
