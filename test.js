@@ -40,7 +40,8 @@ module.exports = function (callback) {
         );
   
     request.on('row', function(columns) {
-      var item = {id: columns[0].value, name: columns[1].value, json: columns[2].value};
+      var json = JSON.parse(columns[2].value);
+      var item = {id: columns[0].value, name: columns[1].value, json: json};
       console.log(item);
       data.push(item);
       /* columns.forEach(function(column) {
