@@ -32,15 +32,15 @@ module.exports = function (callback) {
             {
                 console.log(rowCount + ' row(s) returned');
                 connection.close();
-                callback(data)
-               /*  var datastr = JSON.stringify(data);
-                 callback(datastr); */
+                //callback(data)
+                 var datastr = JSON.stringify(data);
+                 callback(datastr); 
                 data = [];
             }
         );
   
     request.on('row', function(columns) {
-      var item = {id: columns[0].value, name: columns[1].value};
+      var item = {id: columns[0].value, name: columns[1].value, json: columns[2].value};
       console.log(item);
       data.push(item);
       /* columns.forEach(function(column) {
