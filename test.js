@@ -27,8 +27,8 @@ module.exports = function (callback) {
     console.log("Reading rows from the Table...");
       // Read all rows from table
     request = new Request(
-      "SELECT id, name, JSON_QUERY(json) as json" + 
-      "FROM dbo.test" +
+      "SELECT id, name, JSON_QUERY(json) as json " + 
+      "FROM dbo.test " +
       "FOR JSON AUTO",
           function(err, rowCount, rows) 
             {
