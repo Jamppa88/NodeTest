@@ -32,8 +32,9 @@ module.exports = function (callback) {
             {
                 console.log(rowCount + ' row(s) returned');
                 connection.close();
-                var datastr = JSON.stringify(data);
-                callback(datastr);
+                callback(data)
+               /*  var datastr = JSON.stringify(data);
+                 callback(datastr); */
                 data = [];
             }
         );
