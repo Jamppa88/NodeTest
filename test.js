@@ -36,8 +36,8 @@ module.exports = function (callback) {
                 console.log("rows: " + rows);
                 connection.close();
                 //callback(data)
-                var datastr = JSON.stringify(data);
-                callback(datastr); 
+                //var datastr = JSON.stringify(data);
+                callback(data); 
                 data = [];
             }
         );
