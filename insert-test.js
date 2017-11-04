@@ -12,7 +12,18 @@ module.exports = function (data, callback) {
       callback(err);
     else {
       console.log("Reading data...");
-      request = new Request("INSERT INTO dbo.test (name) VALUES ('" + data.name + "')",
+      if (data.json) {
+        request = new Request(
+          "INSERT INTO dbo.test (name, json) VALUES ('" + data.name + "', '"+ data.json +"')",
+          function(err, rowCount, rows) {
+            if (err)
+              callback(err);
+            else {
+              callback("Success");
+            }
+        });
+      } else {
+        request = new Request("INSERT INTO dbo.test (name) VALUES ('" + data.name + "')",
         function(err, rowCount, rows) {
           if (err)
             callback(err);
@@ -20,6 +31,8 @@ module.exports = function (data, callback) {
             callback("Success");
           }
         });
+      }
+      
       connection.execSql(request);
     }
   });
