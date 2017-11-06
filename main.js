@@ -1,12 +1,11 @@
 var express = require('express');
-//var cors = require('cors');
 var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser());
-//app.use(cors());
+
 
 app.get('/', function(req,res) {
-  res.send("Hello world!");
+  res.send('Pörlödö');
 });
 
 app.get('/getdata', function(req,res) {
@@ -17,10 +16,23 @@ app.get('/getdata', function(req,res) {
 });
 
 app.post("/insertdata", function(req,res) {
-  //res.send(req.body);
   var ins = require('./insert-test.js');
   ins(req.body, function(response) {
     res.send(response);
+  });
+});
+
+app.get("/getmonsters", function (req,res) {
+  var getMon = require("./functions/get-all-monsters");
+  getMon(function(data) {
+    res.send(data);
+  });
+});
+
+app.post("/getmonster", function (req,res) {
+  var getMon = require("./functions/get-monster");
+  getMon(req.body, function(data) {
+    res.send(data);
   });
 });
 
