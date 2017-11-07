@@ -15,7 +15,7 @@ export default class LoginView extends Component {
         let password = $("#password").val();
         let obj = {username: username, password: password}
         this.setState({loading: true});
-        $.post("http://localhost/login", obj)
+        $.post("http://jani-test.azurewebsites.net/login", obj)
         .done(response => {
             let res = JSON.parse(response);
             if (res.err) {
