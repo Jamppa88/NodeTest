@@ -4,8 +4,8 @@
   "description": "test deployment of node",
   "main": "main.js",
   "scripts": {
-    "start": "./node_modules/.bin/webpack -d | node main.js",
-    "dev-start": "nodemon main.js"
+    "start": "./node_modules/.bin/webpack -d && node main.js",
+    "dev-start": "./node_modules/.bin/webpack -d && nodemon main.js"
   },
   "repository": {
     "type": "git",
