@@ -11,12 +11,22 @@ var config = {
     filename: 'bundle.js'
   },
   module : {
-    loaders : [
+    rules : [
+        {
+            test: /(\.jsx|\.js)$/,
+            loader: "eslint-loader",
+            exclude: /node_modules/
+          },
       {
         test : /\.jsx?/,
         include : APP_DIR,
-        loader : 'babel-loader'
-      }
+        loader : 'babel-loader',
+        exclude: /node_modules/,
+        query: {
+            presets: ["babel-preset-env", "es2015", "es2016"],
+        }
+      },
+      
     ]
 }
 };
