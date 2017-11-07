@@ -4,9 +4,9 @@
   "description": "test deployment of node",
   "main": "main.js",
   "scripts": {
-    "start": "./node_modules/.bin/webpack -d && node main.js",
-    "dev-start": "./node_modules/.bin/webpack -d && nodemon main.js",
-    "build": "./node_modules/.bin/webpack -d"
+    "start": "node_modules\\.bin\\webpack -d && node main.js",
+    "dev-start": "node_modules\\.bin\\webpack -d && nodemon main.js",
+    "build": "node_modules\\.bin\\webpack -d"
   },
   "repository": {
     "type": "git",
@@ -38,5 +38,11 @@
   },
   "devDependencies": {
     "nodemon": "^1.12.1"
+  },
+  "nodemonConfig": {
+    "ignore": ["public/*"],
+    "events": {
+      "restart": "node_modules\\.bin\\webpack -d"
+    }
   }
 }

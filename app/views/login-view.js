@@ -7,7 +7,7 @@ export default class LoginView extends Component {
 
         return (
             <div>
-                <table>
+                <tbody>
                     <tr>
                         <th>Username: </th>
                         <td><input type="text" id="username" /></td>
@@ -16,7 +16,8 @@ export default class LoginView extends Component {
                         <th>Password:</th>
                         <td><input type="password" id="password" /></td>
                     </tr>
-                </table>
+                </tbody>
+                <p>MoiMoiMoi</p>
             </div>
         );
     }
