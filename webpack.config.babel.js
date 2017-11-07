@@ -23,7 +23,7 @@ var config = {
         loader : 'babel-loader',
         exclude: /node_modules/,
         query: {
-            presets: ["babel-preset-env", "es2015", "es2016"],
+            presets: ["env", "react", "stage-0"],
         }
       },
       
