@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-class App extends React.Component {
+import LoginView from './views/login-view';
+
+class App extends Component {
     render() {
         return (
-            <div>Hello from React! This is different!</div>
+            <LoginView />
         );
     }
     
