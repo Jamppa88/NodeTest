@@ -1,11 +1,13 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var path = require('path');
 var app = express();
 app.use(bodyParser());
+app.use('/public',express.static('public'));
 
 
 app.get('/', function(req,res) {
-  res.send('Pörlödö');
+  res.sendFile(path.join(__dirname,'/index.html'));
 });
 
 app.get('/getdata', function(req,res) {
