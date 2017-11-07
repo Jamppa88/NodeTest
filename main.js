@@ -10,6 +10,13 @@ app.get('/', function(req,res) {
   res.sendFile(path.join(__dirname,'/index.html'));
 });
 
+app.post("/login", function(req,res) {
+  var validate = require('./functions/login');
+  validate(req.body, function(response) {
+    res.send(response);
+  });
+});
+
 app.get('/getdata', function(req,res) {
   var test = require('./test.js');
   test(function(data) {
