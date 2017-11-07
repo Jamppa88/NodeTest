@@ -26,6 +26,10 @@ export default class LoginView extends Component {
                 this.props.login();
             }
             this.setState({loading: false});
+        })
+        .fail(() => {
+            $("#incorrectInput").show();
+            this.setState({loading: false});
         });
     }
 
