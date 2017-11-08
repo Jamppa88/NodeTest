@@ -1,4 +1,5 @@
 import React from 'react';
+// No need to import jquery, use bootstraps own jquery defined in index.html!
 //import $ from 'jquery';
 
 const Navbar = (props) => {

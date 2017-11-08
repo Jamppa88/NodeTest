@@ -3,7 +3,12 @@ import React, { Component } from 'react';
 export default class Listing extends Component {
     state = {jotain: null}
 
+    handleDeleteClick = () => {
 
+    }
+    handleModifyclick = () => {
+
+    }
 
     render() {
         return (
@@ -27,9 +32,9 @@ export default class Listing extends Component {
                             <td>Moi</td>
                             <td>Moi</td>
                             <td>
-                                <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
-                                <span>{"\t"}</span>
-                                <i className="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+                                <button className="btn btn-light"><i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
+                                
+                                <button className="btn btn-light"><i className="fa fa-trash-o fa-2x" aria-hidden="true"></i></button>
                             </td>
                         </tr>
                     </tbody>
