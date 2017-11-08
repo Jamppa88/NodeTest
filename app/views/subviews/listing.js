@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 
+import ListItem from '../../components/list-item';
+import ModListItem from '../../components/modify-list-item';
+
 export default class Listing extends Component {
-    state = {jotain: null}
+    state = {modifyIndex: null}
 
     handleDeleteClick = () => {
-
+        console.log("Delete clicked!")
     }
     handleModifyclick = () => {
-
+        console.log("Modify clicked!")
+        this.setState({modifyIndex: null}); // KESKEN
     }
 
     render() {
         return (
-            <div className="container">
-                <table className="table table-hover table-striped col-12">
+            <div className="container" style={{padding: 0}}>
+                <table className="table table-hover table-striped col-12" style={{padding: 0}}>
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -25,18 +29,8 @@ export default class Listing extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Moi</td>
-                            <td>Moi</td>
-                            <td>Moi</td>
-                            <td>Moi</td>
-                            <td>
-                                <button className="btn btn-light"><i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
-                                
-                                <button className="btn btn-light"><i className="fa fa-trash-o fa-2x" aria-hidden="true"></i></button>
-                            </td>
-                        </tr>
+                        <ListItem modify={this.handleModifyclick} delete={this.handleDeleteClick}/>
+                        <ModListItem modify={this.handleModifyclick} delete={this.handleDeleteClick} />
                     </tbody>
                 </table>
             </div>

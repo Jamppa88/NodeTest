@@ -31,8 +31,8 @@ export default class MainView extends Component {
           break;
       }}
       return (
-        <div className="container">
-          <div className="card text-center col-12" style={{margin: '3em auto 0 auto'}}>
+        <div className="container"  style={{padding: 0}}>
+          <div className="card text-center col-12 col-sm-11 col-md-10" style={{margin: '3em auto 0 auto', padding: 0}}>
             <div className="card-header">
               <Navbar 
                 logout={this.props.logout} 
@@ -40,7 +40,7 @@ export default class MainView extends Component {
                 current={this.state.currentView}
                 changePage={this.handlePageChange} />
             </div>
-            <div className="card-body">
+            <div className="card-body" style={{padding: 0}}>
               <View />
             </div>
           </div>
