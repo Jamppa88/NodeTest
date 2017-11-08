@@ -1,5 +1,5 @@
 import React from 'react';
-import $ from 'jquery';
+//import $ from 'jquery';
 
 const Navbar = (props) => {
   return (
@@ -16,21 +16,30 @@ const Navbar = (props) => {
             type="button" 
             className="btn btn-link nav-link" 
             value="Listing"
-            onClick={props.changePage} />
+            onClick={() => {
+              $(".collapse").collapse("hide");
+              props.changePage(0);
+            }} />
         </li>
         <li className={props.current == 1? "nav-item active": "nav-item"}>
           <input 
             type="button" 
             className="btn btn-link nav-link" 
             value="Add"
-            onClick={props.changePage} />
+            onClick={() => {
+              $(".collapse").collapse("hide");
+              props.changePage(1);
+            }} />
         </li>
         <li className={props.current == 2? "nav-item active": "nav-item"}>
           <input 
             type="button" 
             className="btn btn-link nav-link" 
             value="Profile"
-            onClick={props.changePage} />
+            onClick={() => {
+              $(".collapse").collapse("hide");
+              props.changePage(2);
+            }} />
         </li>
         <li className="nav-item">
           <input 

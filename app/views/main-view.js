@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 
 import Navbar from '../components/navbar';
+import Listing from './subviews/listing';
 
 export default class MainView extends Component {
     state = {
@@ -9,35 +10,19 @@ export default class MainView extends Component {
       loading: false
     }
 
-    /* componentDidMount() {
-        $("#incorrectInput").hide();
-    } */
     searchDB = () => {
       console.log($("#search").val());
       this.setState({currentView: 0});
     }
 
-    handlePageChange = (event) => {
-      //event.preventDefault();
-      switch(event.target.value) {
-        case "Listing":
-          this.setState({currentView: 0});
-          break;
-        case "Add":
-          this.setState({currentView: 1});
-          break;
-        case "Profile":
-          this.setState({currentView: 2});
-          break;
-        default:
-          break;
-      }
+    handlePageChange = (index) => {
+      this.setState({currentView: index});
     }
 
     render() {
       const View = () => {switch(this.state.currentView) {
         case 0:
-          return <div>1</div>;
+          return <Listing />;
         case 1:
           return <div>2</div>;
         case 2:
