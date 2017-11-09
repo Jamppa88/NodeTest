@@ -15,15 +15,17 @@ var config = {
       {
         test: /(\.jsx|\.js)$/,
         loader: "eslint-loader",
-        include: /app/,
-        //exclude: /node_modules/ NO NEED
+        include: [
+          path.resolve(__dirname, 'app')
+        ],
+        exclude: /node_modules/
       }, 
       {
         test : /\.jsx?/,
         include : APP_DIR,
         loader : 'babel-loader',
         include: /app/,
-        //exclude: /node_modules/, NO NEED
+        exclude: /node_modules/,
         query: {
             presets: ["env", "react", "stage-0"],
         }
