@@ -1,0 +1,10 @@
+module.exports = {
+	userName: 'username',
+	password: 'super-secret-password',
+	server: 'database.server',
+	options: {
+        database: 'database',
+        encrypt: true
+    }
+
+}
