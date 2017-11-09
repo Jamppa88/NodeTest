@@ -4,7 +4,7 @@
   "description": "test deployment of node",
   "main": "main.js",
   "scripts": {
-    "start": "./node_modules/.bin/webpack -d && node main.js",
+    "start": "./node_modules/.bin/webpack -d | node main.js",
     "dev-start": "node_modules\\.bin\\webpack -d && nodemon main.js",
     "build": "node_modules\\.bin\\webpack -d"
   },
