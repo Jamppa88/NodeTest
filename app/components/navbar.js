@@ -18,6 +18,7 @@ const Navbar = (props) => {
             className="btn btn-link nav-link" 
             value="Listing"
             onClick={() => {
+              props.getAll();
               $(".collapse").collapse("hide");
               props.changePage(0);
             }} />

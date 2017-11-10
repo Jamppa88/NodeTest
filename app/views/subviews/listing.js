@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 
 import ListItem from '../../components/list-item';
 import ModListItem from '../../components/modify-list-item';
@@ -6,8 +7,8 @@ import ModListItem from '../../components/modify-list-item';
 export default class Listing extends Component {
     state = {
         modifyIndex: null,
-        monsters: null
     }
+    
 
     handleDeleteClick = (data) => {
         console.log("Delete clicked!");
@@ -34,6 +35,7 @@ export default class Listing extends Component {
     }
 
     render() {
+        const mons = this.props.monsters;
         return (
             <div className="container" style={{padding: 0}}>
                 <table className="table table-hover table-striped col-12" style={{padding: 0}}>
@@ -47,7 +49,7 @@ export default class Listing extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {mockData.map((item) => {
+                        {mons.map((item) => {
                             if (item.id === this.state.modifyIndex) {
                                 return (
                                     <ModListItem

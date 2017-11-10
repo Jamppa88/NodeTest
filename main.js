@@ -32,6 +32,13 @@ app.post("/insertdata", function(req,res) {
   });
 });
 
+app.post("/insertmon", function(req, res) {
+  var insMon = require('./functions/insert-new-monster');
+  insMon(req.body, function(response) {
+    res.send(response);
+  });
+});
+
 app.get("/getmonsters", function (req,res) {
   var getMon = require("./functions/get-all-monsters");
   getMon(function(data) {
