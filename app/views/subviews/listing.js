@@ -21,7 +21,7 @@ export default class Listing extends Component {
     handleModifySave = () => {
         console.log("Saving...");
         $(".modify-box").attr("disabled", true);
-        // SEND DELETE REQUEST!!
+        // SEND SAVE REQUEST!!
         
         // only for testing, delete after implementation
         setTimeout(() => {

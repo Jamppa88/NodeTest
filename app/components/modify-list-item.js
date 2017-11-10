@@ -13,7 +13,7 @@ const ModListItem = (props) => {
         </select>
       </td>
       <td className="align-middle align-content-center align-items-center align-self-center" >
-        <input type="checkbox" className="checkbox modify-box" style={{height: '1.8em', width: '1.8em'}} checked={props.data.isPC}/>
+        <input type="checkbox" className="checkbox modify-box" style={{height: '1.8em', width: '1.8em'}} defaultChecked={props.data.isPC} />
       </td>
       <td className="align-middle" style={{minWidth: '95px'}}>
           <button 
