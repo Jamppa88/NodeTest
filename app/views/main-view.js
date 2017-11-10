@@ -53,7 +53,7 @@ export default class MainView extends Component {
       return (
         <div className="container"  style={{padding: 0}}>
           <DeleteModal data={this.state.deleteItem} confirm={this.sendDeleteRequest}/>
-          <div className="card text-center col-12 col-sm-12 col-md-10" style={{margin: '3em auto 0 auto', padding: 0}}>
+          <div className="card text-center col-12 col-sm-12 col-md-10" style={{margin: '0.2em auto 0 auto', padding: 0}}>
             <div className="card-header">
               <Navbar 
                 logout={this.props.logout} 
