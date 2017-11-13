@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var nodeExternals = require('webpack-node-externals');
 var path = require('path');
 
 var BUILD_DIR = path.join(__dirname, '/public');
@@ -12,20 +13,20 @@ var config = {
   },
   module : {
     rules : [
-      {
+      /* {
         test: /(\.jsx|\.js)$/,
         loader: "eslint-loader",
         include: [
           path.resolve(__dirname, 'app')
         ],
         exclude: /node_modules/
-      }, 
+      },  */
       {
         test : /\.jsx?/,
         include : APP_DIR,
         loader : 'babel-loader',
         include: /app/,
-        exclude: /node_modules/,
+        exclude: path.resolve(__dirname, 'node_modules'),
         query: {
             presets: ["env", "react", "stage-0"],
         }

@@ -4,19 +4,21 @@ import $$ from 'jquery'; // $ is reserved for Bootstrap jQuery-plugin!
 import Navbar from '../components/navbar';
 import Listing from './subviews/listing';
 import DeleteModal from '../components/delete-modal';
+import AddModal from '../components/add-modal';
 import AddView from './subviews/add';
 
 export default class MainView extends Component {
-    state = {
-      currentView: 0, 
-      loading: false,
-      deleteItem: null,
-      monsters: []
-    }
+  state = {
+    currentView: 0, 
+    loading: false,
+    deleteItem: null,
+    addName: null,
+    monsters: []
+  }
 
-    componentDidMount() {
-      this.getMonsters();
-    }
+  componentDidMount() {
+    this.getMonsters();
+  }
 
   getMonsters = () => {
       console.log("Getting monsters...");
@@ -25,7 +27,7 @@ export default class MainView extends Component {
       $$.getJSON("/getmonsters")
         .done(data => {
           console.log("Success!");
-          console.log(data);
+         // console.log(data);
          // let temp =  JSON.parse(data);
           self.setState({monsters: data});
         })
@@ -34,18 +36,36 @@ export default class MainView extends Component {
         });
     }
 
-    
+    sendSaveRequest = (item, callback) => {
+      //console.log(item);
+      let obj = {
+        token: this.props.token,
+        obj: item
+      }
+      this.setState({addName: item.name});
+      $$(".add-mon").attr("disabled", true);
+      $$.post("/insertmon", obj)
+        .done(response => {
+          $$(".add-mon").removeAttr("disabled");
+          $("#add-modal").modal("show");
+          console.log(response);
+        })
+        .fail(err => {
+          console.log(err);
+        });
+      callback();
+    }
 
     searchDB = () => {
-      console.log($$("#search").val());
+      //console.log($$("#search").val());
       $(".collapse").collapse("hide");
-      console.log("Searching...");
+      //console.log("Searching...");
       let obj = {query: $$("#search").val()};
       let self = this;
       $$.post("/getmonster", obj)
         .done(response => {
           console.log("Success!");
-          console.log(response);
+          //console.log(response);
           self.setState({monsters: JSON.parse(response)});
         })
         .fail(err => {
@@ -59,17 +79,34 @@ export default class MainView extends Component {
       console.log("Deleting...");
       $(".modal-btn").attr("disabled", true);
       // SEND DELETE REQUEST!!
-      
-      // only for testing, delete after implementation
-      setTimeout(() => {
-        $(".modal-btn").attr("disabled", false);
-        $("#delete-modal").modal('hide');
-      }, 2000);
-      
+      let obj = {
+        token: this.props.token,
+        id: this.state.deleteItem.id
+      }
+      let self = this;
+      $$.post("/deletemon", obj)
+        .done(response => {
+          console.log(response);
+          self.getMonsters();
+        })
+        .fail(err => {
+          console.log("Failed!");
+          console.log(err);
+        })
+        .always(() => {
+          $(".modal-btn").attr("disabled", false);
+          $("#delete-modal").modal('hide');
+          self.setState({deleteItem: null});
+        });
+    }
 
+    handleDeleteCancel = () => {
+      this.setState({deleteItem: null});
     }
 
     handlePageChange = (index) => {
+      if (index === 0) 
+        this.getMonsters();
       this.setState({currentView: index});
     }
 
@@ -81,9 +118,9 @@ export default class MainView extends Component {
     render() {
       const View = () => {switch(this.state.currentView) {
         case 0:
-          return <Listing toggleModal={this.handleToggleModal} monsters={this.state.monsters}/>;
+          return <Listing toggleModal={this.handleToggleModal} monsters={this.state.monsters} rights={this.props.rights}/>;
         case 1:
-          return <AddView />;
+          return <AddView sendSaveRequest={this.sendSaveRequest} rights={this.props.rights}/>;
         case 2:
           return <div>3</div>;
         default:
@@ -91,11 +128,11 @@ export default class MainView extends Component {
       }}
       return (
         <div className="container"  style={{padding: 0}}>
-          <DeleteModal data={this.state.deleteItem} confirm={this.sendDeleteRequest}/>
+          <DeleteModal data={this.state.deleteItem} confirm={this.sendDeleteRequest} cancel={this.handleDeleteCancel}/>
+          <AddModal name={this.state.addName} back={this.handlePageChange} />
           <div className="card text-center col-12 col-sm-12 col-md-10" style={{margin: '0.2em auto 0 auto', padding: 0}}>
             <div className="card-header">
               <Navbar 
-                getAll={this.getMonsters}
                 logout={this.props.logout} 
                 search={this.searchDB} 
                 current={this.state.currentView}

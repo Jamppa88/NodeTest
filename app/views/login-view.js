@@ -1,35 +1,37 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
+import $$ from 'jquery';
 
 export default class LoginView extends Component {
     state = {invalid: false, loading: false}
     
     // On initial mounting, hide warning message
     componentDidMount() {
-        $("#incorrectInput").hide();
+        $$("#incorrectInput").hide();
     }
     // Send request to server
     sendLoginData = () => {
-        $("#incorrectInput").hide();
-        let username = $("#username").val();
-        let password = $("#password").val();
+        $$("#incorrectInput").hide();
+        let username = $$("#username").val();
+        let password = $$("#password").val();
         let obj = {username: username, password: password}
         this.setState({loading: true});
-        $.post("/login", obj)
+        $$.post("/login", obj)
         .done(response => {
             console.log(response);
-            let res = JSON.parse(response);
-            if (res.err) {
-                $("#incorrectInput").show();
+            if (response == "err") {
+                this.setState({loading: false});
+                $$("#incorrectInput").show();
             } else {
-                //console.log(res);
-                sessionStorage.logged = res[1];
+                console.log(response);
+                sessionStorage.token = response.token;
+                sessionStorage.rights = response.rights? 1 : 0;
+                this.setState({loading: false});
                 this.props.login();
             }
-            this.setState({loading: false});
+            
         })
         .fail(() => {
-            $("#incorrectInput").show();
+            $$("#incorrectInput").show();
             this.setState({loading: false});
         });
     }

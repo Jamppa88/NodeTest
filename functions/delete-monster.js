@@ -10,14 +10,14 @@ module.exports = function (data, callback) {
       callback("Check your rights!");
     else {
       var connection = new Connection(config);
-
+      
       connection.on("connect", function(err) {
         if (err)
           callback(err);
         else {
           console.log("Reading data...");
             request = new Request(
-                "INSERT INTO dbo.Monsters (name, mod, adv, isPC) VALUES ('" + data.obj.name + "', "+ data.obj.mod +", '"+data.obj.adv+"', '"+data.obj.isPC+"')",
+                "DELETE FROM dbo.Monsters WHERE id = "+data.id,
                 function(err, rowCount, rows) {
                 if (err)
                     callback(err);

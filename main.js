@@ -60,6 +60,13 @@ app.post("/deleteitem", function(req,res) {
   });
 });
 
+app.post("/deletemon", function(req,res) {
+  var delMon = require('./functions/delete-monster');
+  delMon(req.body, function(response) {
+    res.send(response);
+  })
+})
+
 var server = app.listen(process.env.PORT || 80, function() {
   var host = server.address().address;
   var port = server.address().port;

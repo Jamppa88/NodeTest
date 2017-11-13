@@ -4,6 +4,7 @@ import $ from 'jquery';
 
 import LoginView from './views/login-view';
 import MainView from './views/main-view';
+import RegisterView from './views/register-view';
 
 /* This is the entry point for all the other front-end javascript
  * App only cares about view switching, and maintaining
@@ -11,16 +12,18 @@ import MainView from './views/main-view';
  */
 class App extends Component {
     state = {
-        username: sessionStorage.logged,
+        token: sessionStorage.token,
+        userRights: Boolean(sessionStorage.rights),
         register: false
     }
 
     login = () => {
-        this.setState({username: sessionStorage.logged});
+        this.setState({token: sessionStorage.token, userRights: Boolean(sessionStorage.rights)});
     }
     logout = () => {
-        sessionStorage.removeItem("logged");
-        this.setState({username: null});
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("rights");
+        this.setState({token: null, userRights: null});
     }
     registerNewUser = () => {
         this.setState({register: true});
@@ -31,18 +34,12 @@ class App extends Component {
 
     render() {
         if (this.state.register) {
-            return (
-                <div>Tänne jotain
-                    <input 
-                        className="btn btn-secondary" 
-                        onClick={this.closeRegisterNewUser} />
-                </div>
-            );
-        } else if (this.state.username == null || this.state.username == undefined) {
+            return <RegisterView closeRegisterNewUser={this.closeRegisterNewUser} />;
+        } else if (this.state.token == null || this.state.token == undefined) {
             return <LoginView login={this.login} register={this.registerNewUser}/>;
         } else {
             return (
-                <MainView logout={this.logout} />
+                <MainView logout={this.logout} token={this.state.token} rights={this.state.userRights}/>
             );
         }
         

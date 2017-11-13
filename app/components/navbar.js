@@ -18,7 +18,6 @@ const Navbar = (props) => {
             className="btn btn-link nav-link" 
             value="Listing"
             onClick={() => {
-              props.getAll();
               $(".collapse").collapse("hide");
               props.changePage(0);
             }} />
@@ -52,7 +51,17 @@ const Navbar = (props) => {
         </li>
       </ul>
       <div className="form-inline my-2 my-lg-0">
-        <input id="search" className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
+        <input 
+          id="search" 
+          className="form-control mr-sm-2" 
+          type="text"
+          onKeyPress={event => {
+            if (event.key === "Enter") {
+              props.search();
+            }
+          }} 
+          placeholder="Search" 
+          aria-label="Search" />
         <input 
           className="btn btn-outline-success my-2 my-sm-0" 
           type="button" 

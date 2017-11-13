@@ -16,8 +16,19 @@ const DeleteModal = (props) => {
                         <p>Are you sure you want to delete {name}?</p>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-danger modal-btn" onClick={props.confirm}>Delete</button>
-                        <button type="button" className="btn btn-secondary modal-btn" data-dismiss="modal">Cancel</button>
+                        <button 
+                            type="button" 
+                            className="btn btn-danger modal-btn" 
+                            onClick={props.confirm}>
+                                Delete
+                        </button>
+                        <button 
+                            type="button" 
+                            className="btn btn-secondary modal-btn" 
+                            data-dismiss="modal" 
+                            onClick={props.cancel}>
+                                Cancel
+                        </button>
                     </div>
                 </div>
             </div>

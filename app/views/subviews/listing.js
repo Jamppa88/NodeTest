@@ -11,18 +11,15 @@ export default class Listing extends Component {
     
 
     handleDeleteClick = (data) => {
-        console.log("Delete clicked!");
         this.props.toggleModal(data);
     }
     handleModifyclick = (index) => {
-        console.log("Modify clicked!");
-        console.log(index);
         this.setState({modifyIndex: index}); // KESKEN
     }
     handleModifySave = () => {
         console.log("Saving...");
         $(".modify-box").attr("disabled", true);
-        // SEND SAVE REQUEST!!
+        // SEND MODIFY REQUEST!!
         
         // only for testing, delete after implementation
         setTimeout(() => {
@@ -56,6 +53,7 @@ export default class Listing extends Component {
                                         key={item.id}
                                         save={this.handleModifySave}
                                         cancel={this.handleModifyCancel}
+                                        rights={this.props.rights}
                                         data={item} />
                                 );
                             } else {
@@ -64,6 +62,7 @@ export default class Listing extends Component {
                                         key={item.id}
                                         modify={this.handleModifyclick}
                                         delete={this.handleDeleteClick}
+                                        rights={this.props.rights}
                                         data={item} />
                                 );
                             }
