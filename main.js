@@ -11,6 +11,13 @@ app.get('/', function(req,res) {
   res.sendFile(path.join(__dirname,'/index.html'));
 });
 
+app.post('/getUser', function(req,res) {
+  var getUser = require('./functions/get-user');
+  getUser(req.body, function(response) {
+    res.send(response);
+  });
+});
+
 app.post("/login", function(req,res) {
   var validate = require('./functions/login');
   validate(req.body, function(response) {
@@ -18,16 +25,16 @@ app.post("/login", function(req,res) {
   });
 });
 
-app.get('/getdata', function(req,res) {
-  var test = require('./test.js');
-  test(function(data) {
-    res.send(data);
+app.post("/registerNewUser", function(req,res) {
+  var register = require("./functions/insert-new-user");
+  register(req.body, function(response) {
+    res.send(response);
   });
 });
 
-app.post("/insertdata", function(req,res) {
-  var ins = require('./insert-test.js');
-  ins(req.body, function(response) {
+app.post("/changePassword", function(req,res) {
+  var change = require("./functions/change-password");
+  change(req.body, function(response) {
     res.send(response);
   });
 });
@@ -53,19 +60,19 @@ app.post("/getmonster", function (req,res) {
   });
 });
 
-app.post("/deleteitem", function(req,res) {
-  var del = require("./delete-test.js");
-  del(req.body, function(response) {
-    res.send(response);
-  });
-});
-
 app.post("/deletemon", function(req,res) {
   var delMon = require('./functions/delete-monster');
   delMon(req.body, function(response) {
     res.send(response);
-  })
-})
+  });
+});
+
+app.post("/modifymon", function(req,res) {
+  var modMon = require("./functions/modify-monster");
+  modMon(req.body, function(response) {
+    res.send(response);
+  });
+});
 
 var server = app.listen(process.env.PORT || 80, function() {
   var host = server.address().address;

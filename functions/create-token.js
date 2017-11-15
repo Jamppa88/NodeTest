@@ -3,7 +3,7 @@ var jwtConfig = require('../../jwt-config');
 
 module.exports = function(body, callback) {
   const payload = {
-    username: body.name,
+    username: body.username,
     rights: body.rights
   }
   var token = jwt.sign(payload, jwtConfig.secret, {

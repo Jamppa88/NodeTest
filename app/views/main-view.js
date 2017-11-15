@@ -6,6 +6,7 @@ import Listing from './subviews/listing';
 import DeleteModal from '../components/delete-modal';
 import AddModal from '../components/add-modal';
 import AddView from './subviews/add';
+import Profile from './subviews/profile';
 
 export default class MainView extends Component {
   state = {
@@ -118,11 +119,18 @@ export default class MainView extends Component {
     render() {
       const View = () => {switch(this.state.currentView) {
         case 0:
-          return <Listing toggleModal={this.handleToggleModal} monsters={this.state.monsters} rights={this.props.rights}/>;
+          return (
+            <Listing 
+              toggleModal={this.handleToggleModal} 
+              monsters={this.state.monsters} 
+              rights={this.props.rights}
+              getMonsters={this.getMonsters}
+              token={this.props.token}/>
+          );
         case 1:
           return <AddView sendSaveRequest={this.sendSaveRequest} rights={this.props.rights}/>;
         case 2:
-          return <div>3</div>;
+          return <Profile token={this.props.token} />;
         default:
           break;
       }}

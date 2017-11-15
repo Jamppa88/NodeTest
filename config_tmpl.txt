@@ -1,3 +1,4 @@
+// config.js
 module.exports = {
 	userName: 'username',
 	password: 'super-secret-password',
@@ -7,4 +8,9 @@ module.exports = {
         encrypt: true
     }
 
+}
+
+// jwtConfig.js
+module.exports = {
+	secret: "supersecrettokenpassfrase"
 }

@@ -1,31 +1,75 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
+import $$ from 'jquery';
 
 import ListItem from '../../components/list-item';
 import ModListItem from '../../components/modify-list-item';
+
+var timer;
 
 export default class Listing extends Component {
     state = {
         modifyIndex: null,
     }
+
+    componentDidMount() {
+        timer = setInterval(() => {
+            this.props.getMonsters();
+        },10000);
+    }
     
+    componentWillUnmount() {
+        clearInterval(timer);
+    }
 
     handleDeleteClick = (data) => {
         this.props.toggleModal(data);
     }
     handleModifyclick = (index) => {
-        this.setState({modifyIndex: index}); // KESKEN
+        this.setState({modifyIndex: index});
     }
     handleModifySave = () => {
         console.log("Saving...");
-        $(".modify-box").attr("disabled", true);
+        $$(".modify-box").attr("disabled", true);
         // SEND MODIFY REQUEST!!
-        
-        // only for testing, delete after implementation
-        setTimeout(() => {
-          $(".modify-box").attr("disabled", false);
-         this.setState({modifyIndex: null});
-        }, 2000);
+        let item = {};
+        $$(".modify-input").each((index, element) => {
+            switch (element.name) {
+                case "id":
+                    item.id = element.value;
+                    break;
+                case "name":
+                    item.name = element.value;
+                    break;
+                case "mod":
+                    item.mod = element.value;
+                    break;
+                case "adv":
+                    item.adv = element.value;
+                    break;
+                case "isPC":
+                    item.isPC = element.checked;
+                    break;
+                default:
+                    break;
+            }
+        });
+        let obj = {
+            token: this.props.token,
+            obj: item
+        }
+        let self = this;
+        $$.post("/modifymon", obj)
+            .done(response => {
+                console.log(response);
+            })
+            .fail(err => {
+                console.log(err);
+            })
+            .always(() => {
+                $$(".modify-box").attr("disabled", false);
+                self.setState({modifyIndex: null});
+                self.props.getMonsters();
+            });
     }
     handleModifyCancel = () => {
         this.setState({modifyIndex: null});

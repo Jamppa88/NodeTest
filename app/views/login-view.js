@@ -7,24 +7,25 @@ export default class LoginView extends Component {
     // On initial mounting, hide warning message
     componentDidMount() {
         $$("#incorrectInput").hide();
+        this.props.newUser? $$("#newUser").show() : $$("#newUser").hide();
     }
     // Send request to server
     sendLoginData = () => {
         $$("#incorrectInput").hide();
-        let username = $$("#username").val();
-        let password = $$("#password").val();
+        this.props.closeSuccess();
+        $$("#newUser").hide();
+        let username = $$("#login-username").val();
+        let password = $$("#login-password").val();
         let obj = {username: username, password: password}
         this.setState({loading: true});
         $$.post("/login", obj)
         .done(response => {
-            console.log(response);
             if (response == "err") {
                 this.setState({loading: false});
                 $$("#incorrectInput").show();
             } else {
-                console.log(response);
                 sessionStorage.token = response.token;
-                sessionStorage.rights = response.rights? 1 : 0;
+                sessionStorage.rights = (!!response.rights? 1 : 0);
                 this.setState({loading: false});
                 this.props.login();
             }
@@ -52,11 +53,12 @@ export default class LoginView extends Component {
                         <h3>D&D Monster Database</h3>
                     </div>
                     <div className="card-body">
+                        <p className="text-success" id="newUser">New user created!</p>
                         <p className="text-danger" id="incorrectInput">Incorrect username/password!</p>
                         <input 
                             className="form-control text-center" 
                             type="text" 
-                            id="username"
+                            id="login-username"
                             placeholder="Username" 
                             disabled={this.state.loading}
                             onKeyPress={this.handleKeyPress}
@@ -64,7 +66,7 @@ export default class LoginView extends Component {
                         <input 
                             className="form-control text-center" 
                             type="password" 
-                            id="password"
+                            id="login-password"
                             onKeyPress={this.handleKeyPress}
                             disabled={this.state.loading} 
                             placeholder="Password" />
