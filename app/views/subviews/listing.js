@@ -25,6 +25,7 @@ export default class Listing extends Component {
         this.props.toggleModal(data);
     }
     handleModifyclick = (index) => {
+        clearInterval(timer);
         this.setState({modifyIndex: index});
     }
     handleModifySave = () => {
@@ -68,10 +69,16 @@ export default class Listing extends Component {
             .always(() => {
                 $$(".modify-box").attr("disabled", false);
                 self.setState({modifyIndex: null});
+                timer = setInterval(() => {
+                    self.props.getMonsters();
+                },10000);
                 self.props.getMonsters();
             });
     }
     handleModifyCancel = () => {
+        timer = setInterval(() => {
+            this.props.getMonsters();
+        },10000);
         this.setState({modifyIndex: null});
     }
 
