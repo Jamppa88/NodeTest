@@ -22,7 +22,7 @@ module.exports = function(body, callback) {
             }
         });
         request.on('row', function(columns) {
-          data = columns[0].value;
+          data += columns[0].value;
         });
 
         connection.execSql(request);
