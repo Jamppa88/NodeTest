@@ -32,7 +32,7 @@
     "eslint": "^4.10.0",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-react": "^7.4.0",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "jquery": "^3.2.1",
     "jsonwebtoken": "^8.1.0",
     "loader-runner": "^2.3.0",
